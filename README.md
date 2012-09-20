@@ -1,0 +1,1 @@
+Compile using InnoSetup.  Define islandora_app.ini.  Run islandora_setup.exe
