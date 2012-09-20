@@ -1,0 +1,117 @@
+<?php
+
+/*
+ * @file
+ * islandora_solr_search install file
+ */
+
+/**
+ * Implementation of hook_requirements().
+ *
+ * @return
+ *   An array describing the status of the site regarding available updates.
+ *   If there is no update data, only one record will be returned, indicating
+ *   that the status of core can't be determined. If data is available, there
+ *   will be two records: one for core, and another for all of contrib
+ *   (assuming there are any contributed modules or themes enabled on the
+ *   site). In addition to the fields expected by hook_requirements ('value',
+ *   'severity', and optionally 'description'), this array will contain a
+ *   'reason' attribute, which is an integer constant to indicate why the
+ *   given status is being returned (UPDATE_NOT_SECURE, UPDATE_NOT_CURRENT, or
+ *   UPDATE_UNKNOWN). This is used for generating the appropriate e-mail
+ *   notification messages during update_cron(), and might be useful for other
+ *   modules that invoke update_requirements() to find out if the site is up
+ *   to date or not.
+ *
+ * @see _update_message_text()
+ * @see _update_cron_notify()
+ */
+function islandora_solr_search_requirements($phase) {
+  $t = get_t();
+  $requirements = array();
+    if (module_exists('apachesolr')) {
+      module_load_include('php', 'apachesolr', 'SolrPhpClient/Apache/Solr/Service');
+    }
+    else {
+      module_load_include('php', 'islandora_solr_search', 'SolrPhpClient/Apache/Solr/Service');
+    }
+    if ($phase == 'install') {
+
+
+    if (!class_exists('Apache_Solr_Service')) {
+      $requirements['islandora_solr_search'] = array(
+        'title' => $t('Missing Apache Client'),
+        'description' => $t('This module requires the ' . l('Apache Solr php client', 'http://code.google.com/p/solr-php-client') . '.  Please install the client directory in the root directory of this module before continuing.'),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+  return $requirements;
+}
+
+
+/**
+ * Implementation of hook_install().
+ */
+
+function islandora_solr_search_install() {
+  $message = t('Islandora Solr Search <a href="!link">configuration page</a>.', array('!link' => url('admin/settings/islandora_solr_search')));
+  drupal_set_message(filter_xss($message));
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+
+function islandora_solr_search_uninstall() {
+
+  // removing variables
+  // @TODO: update the latest additions
+  $variables = array(
+    'islandora_solr_primary_display',
+    'islandora_solr_primary_display_table',
+    'islandora_solr_secondary_display',
+    'islandora_solr_searchterms',
+    'islandora_solr_search_base_filter',
+    'islandora_solr_search_base_query',
+    'islandora_solr_search_block_facets',
+    'islandora_solr_search_block_facet_limit',
+    'islandora_solr_search_block_facet_min_count',
+    'islandora_solr_search_block_facet_shown_limit',
+    'islandora_solr_facet_date',
+    'islandora_solr_facet_date_start',
+    'islandora_solr_facet_date_end',
+    'islandora_solr_facet_date_gap',
+    'islandora_solr_facet_date_format',
+    'islandora_solr_search_block_repeat',
+    'islandora_solr_search_block_request_handler',
+    'islandora_solr_search_block_url',
+    'islandora_solr_search_debug_mode',
+    'islandora_solr_search_limit_result_fields',
+    'islandora_solr_search_num_of_results',
+    'islandora_solr_search_result_fields',
+    'islandora_solr_snippet_field',
+    'islandora_solr_search_namespace_restriction',
+  );
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+}
+
+/**
+ * Variable name change. Catch old value.
+ */
+function islandora_solr_search_update_6000() {
+  $ret = array();
+  // check for old variable. Return FALSE if it does not exist.
+  if ($old_val = variable_get('solr_namespace_restriction', FALSE)) {
+    // set new value
+    variable_set('islandora_solr_search_namespace_restriction', $old_val);
+    // remove old variable
+    variable_del('solr_namespace_restriction');
+    // set messages
+      $ret[] = array('success' => TRUE, 'query' => 'variable_set("islandora_solr_search_namespace_restriction")');
+      $ret[] = array('success' => TRUE, 'query' => 'variable_del("solr_namespace_restriction")');
+  }
+  return $ret;
+}

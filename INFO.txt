@@ -1,0 +1,12 @@
+Version Stack
+-------------------
+Drupal 6.26
+Islandora 6.x-12.2.0
+MySQL 5.5.27 (64-bit)
+PHP 5.3.13
+ApacheHTTP 2.2.21
+Fedora 3.4.2
+SOLR 1.4.1
+Gsearch 2.2
+
+WARNING: Backup all files before running installer (mainly TOMCAT_HOME and FEDORA_HOME directories).  It is not recommended to install components separately as this has not been tested.

@@ -1,0 +1,204 @@
+/**
+ * = Primary Topic Title Header ============================================
+ */
+
+#branding-pageheader h1 {
+	margin:0;
+	padding:0 4px;
+	line-height:1.8;
+	height:36px;
+	clear:left;
+}
+
+#index #branding-pageheader h1 a,
+#index #branding-pageheader h1 a:visited,
+#branding-pageheader h1 a,
+#branding-pageheader h1 a:visited {
+	color:#5a8e29;
+	font-family:"Trebuchet MS", Arial, sans-serif; 
+	font-size:2.5em;	
+	margin:0 0 0 10px;
+	padding:0;
+	text-decoration:none;
+	font-weight:normal;
+}
+
+#index #branding-pageheader h1 a:hover,
+#branding-pageheader h1 a:hover {
+	color:#5a8e29;
+	text-decoration:none;
+	margin:0;
+	margin-left:10px;
+	padding:0;
+	border-bottom:1px dotted #5a8e29;
+}
+
+#branding-pageheader h1 a,
+#branding-pageheader h1 a:visited {
+	color:#fff;
+	font-size:1.8em;
+	border-bottom:1px dotted #fff;
+}
+
+#branding-pageheader h1 a:hover {
+	color:#fff;
+	border-bottom:1px solid #fff;
+}
+
+#topic-title{
+	position:relative;
+	margin-top:40px;
+	width:auto;
+	overflow:hidden;
+}
+#topic-title h1,
+#topic-title h2 {
+	color:#0c5205;
+	padding-right:0.5em;
+	font-family:"Trebuchet MS", Arial, sans-serif;
+	font-size:1.8em;
+	font-weight:normal;
+	position:relative;
+	margin:10px;
+}
+#topic-title h1 a:hover,
+#topic-title h2 a:hover {border-bottom:1px solid #5a8e29;}
+
+#topic-title h1 a,
+#topic-title h2 a {
+	color:#0c5205;
+	font-family:"Trebuchet MS", Arial, sans-serif;
+	margin:0;
+	padding:0;
+	text-decoration:none;
+	font-weight:normal;
+	border-bottom:none;
+}
+#topic-title h1 em,
+#topic-title h2 em{
+	font-size:0.85em;
+	font-style:normal;
+	color:#999;
+}
+
+/**
+ * = Module Heading Styles ===========================================
+ */
+body div#two-column-grid h2{
+	background:transparent url("http://www.cdc.gov/TemplatePackage/images/bg_gradient-yellow.gif") 0 0;
+	color:#72490E;
+	font:1.1em Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	margin:0 -4px;
+	border:none;
+	padding:2px 5px;
+	min-height:15px;
+}
+
+body#index #topic-intro a {text-decoration:none;}
+
+body#index #topic-intro a:hover {text-decoration:underline;}
+
+/**
+ * = Contact Info and Datestamp Modules ================================
+ */
+#contact-info h5{
+	margin:0 0.5em 0.75em;
+	font-family:"Trebuchet MS";
+	font-size:1.1em;
+	font-weight:bold;
+	width:auto;
+}
+
+#contact-info li {font-size:0.9em;}
+
+#contact-info li a{
+	color:#0a29a5;
+	text-decoration:underline;
+}
+
+#contact-info li a:hover{
+	color:#0a29a5;
+	text-decoration:none;	
+}
+
+#siteinfo-credits p,
+#siteinfo-credits address{
+	background:transparent;
+	padding:10px 0 0 10px;
+	line-height:1.55em;
+	text-align:left;
+	font-family: "Verdana", "Arial", "Helvetica", sans-serif;
+	font-size: .72em;
+	font-style: normal;
+}
+
+#siteinfo-credits address a{
+	color:#0a29a5;
+	text-decoration:underline;
+}
+
+#siteinfo-credits address a:hover{text-decoration:none;}
+
+#datestamp, #blog #datestamp {
+	clear:left;
+	margin:0 185px 0 0;
+	border:none;
+	padding:10px;
+	color:#696969;
+	font-size:0.9em;
+	list-style:none;
+	min-height:30px;
+}
+#index #datestamp, #blog #datestamp, .widePage #datestamp {padding:1em;}
+.secondTier.optionalTwo #datestamp {margin-right:0;}
+
+#applicationsPage #datestamp {padding-top:0;}
+
+.secondTier #datestamp {
+	border-left:189px solid #fff;
+	overflow:hidden;
+}
+
+#datestamp ul {margin-left:0;}/* -- This is used to override line rule on line 102 -- */
+
+.secondTier #datestamp ul {
+	margin:0;
+	z-index:-2;
+}
+*:first-child+html .secondTier #datestamp ul {min-width:100%;}
+
+#datestamp ul li{
+	margin:0 1em 0 0;
+	padding:0;
+	line-height:14px;
+	list-style:none;	
+}
+	#datestamp ul li h3{ 
+		clear:left;
+		padding-top:2px;
+		font-size:1.1em;
+		color:#999;
+		font-weight:bold;
+		border:none;
+		position:relative;
+	}
+#datestamp ul li.contentsource{ 
+	padding-right:0;
+	position:relative;
+	float:left;
+}
+#datestamp ul a, #datestamp ul a:visited{color:#0a29a5;}
+#datestamp ul a:hover{text-decoration:underline;}
+
+#pageOptions li a:hover{text-decoration:underline;}
+
+/**
+ * = THIS IS USED TO MAKE STANDARD TEXT SMALLER FOR APPEARANCE ==========
+ */
+ 
+.smallerFont{font-size:0.85em;}
+
+.heavyFont{font-size:1.25em;}
+
+}

@@ -1,0 +1,34 @@
+<?php
+
+/** 
+ * Update to remove obsolete variable. 
+ */
+function tabs_update_1() {
+  variable_del('tabs_auto_height');
+}
+
+/** 
+ * Implementation of hook_uninstall(). 
+ */
+function tabs_uninstall() {
+ foreach (array('slide', 'fade', 'speed', 'navigation', 'nav_next', 'nav_previous', 'descriptive_urls') as $type) {
+   variable_del('tabs_'. $type);
+ }
+}
+
+
+/**
+* Variable value update
+*/
+function tabs_update_6000() {
+  $ret = array();
+  // set new value
+  variable_set('tabs_fade', 1);
+  variable_set('tabs_speed', 'fast');
+  
+  // set messages
+  $ret[] = array('success' => TRUE, 'query' => 'variable_set(\'tabs_fade\', 1)');
+  $ret[] = array('success' => TRUE, 'query' => 'variable_set(\'tabs_speed\', \'fast\')');
+  
+  return $ret;
+}

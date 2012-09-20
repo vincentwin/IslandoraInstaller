@@ -1,0 +1,21 @@
+[Tue Sep 11 13:19:56 2012] [notice] Apache/2.2.21 (Win32) PHP/5.3.13 configured -- resuming normal operations
+[Tue Sep 11 13:19:56 2012] [notice] Server built: Sep  9 2011 10:26:10
+[Tue Sep 11 13:19:56 2012] [notice] Parent: Created child process 1680
+[Tue Sep 11 13:19:56 2012] [notice] Child 1680: Child process is running
+[Tue Sep 11 13:19:56 2012] [notice] Child 1680: Acquired the start mutex.
+[Tue Sep 11 13:19:56 2012] [notice] Child 1680: Starting 250 worker threads.
+[Tue Sep 11 13:19:56 2012] [notice] Child 1680: Starting thread to listen on port 80.
+[Tue Sep 11 13:20:21 2012] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 11 13:20:21 2012] [notice] Child 1680: Exit event signaled. Child process is ending.
+[Tue Sep 11 13:20:22 2012] [notice] Child 1680: Released the start mutex
+[Tue Sep 11 13:20:23 2012] [notice] Child 1680: All worker threads have exited.
+[Tue Sep 11 13:20:24 2012] [notice] Child 1680: Child process is exiting
+[Tue Sep 11 13:20:24 2012] [notice] Parent: Child process exited successfully.
+[Tue Sep 11 13:20:24 2012] [notice] Apache/2.2.21 (Win32) PHP/5.3.13 configured -- resuming normal operations
+[Tue Sep 11 13:20:24 2012] [notice] Server built: Sep  9 2011 10:26:10
+[Tue Sep 11 13:20:24 2012] [notice] Parent: Created child process 4152
+[Tue Sep 11 13:20:25 2012] [notice] Child 4152: Child process is running
+[Tue Sep 11 13:20:25 2012] [notice] Child 4152: Acquired the start mutex.
+[Tue Sep 11 13:20:25 2012] [notice] Child 4152: Starting 250 worker threads.
+[Tue Sep 11 13:20:25 2012] [notice] Child 4152: Starting thread to listen on port 9025.
+[Tue Sep 11 13:20:31 2012] [error] [client 127.0.0.1] File does not exist: D:/Apache-islandora/htdocs/favicon.ico
