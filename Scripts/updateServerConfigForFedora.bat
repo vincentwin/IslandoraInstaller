@@ -25,5 +25,5 @@ cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\ind
 
 cscript replace.vbs %TomcatDir%\webapps\fedora\WEB-INF\web.xml "${FedoraDir}" "%FedoraDir%"
 
-cscript replace.vbs %TomcatDir%\conf\Catalina\localhost\solr.xml "${TomcatDir}" "%TomcatDir%"
+cscript replace.vbs %TomcatDir%\conf\Catalina\localhost\solr.xml "${FedoraDir}" "%FedoraDir%"
 cscript replace.vbs %FedoraDir%\gsearch_solr\solr\conf\solrconfig.xml "${FedoraDir}" "%FedoraDir%"

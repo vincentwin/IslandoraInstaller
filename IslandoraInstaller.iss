@@ -97,22 +97,22 @@ Name: "english"; MessagesFile: "compiler:Default.isl";
 Source: "ApacheHTTP\*"; DestDir: "{#ApacheTargetDir}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: apache;
 Source: "Scripts\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: apache mysql;
 Source: "MySQL\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: mysql;
-;Source: "ConfigFiles\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora apache;
-;Source: "Islandora\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora;
-Source: "ConfigFiles\httpd.conf.{#envID}"; DestDir: "{#ApacheTargetDir}\conf"; DestName:"httpd.conf"; Flags: ignoreversion external; Components: apache;
+Source: "ConfigFiles\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora apache;
+Source: "Islandora\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora;
+Source: "{tmp}\httpd.conf.{#envID}"; DestDir: "{#ApacheTargetDir}\conf"; DestName:"httpd.conf"; Flags: ignoreversion external; Components: apache;
 Source: "PHP\*"; DestDir: "{#PhpDir}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: drupal;
 ; Backup Fedora's web.xml and copy new web.xml
 Source: "{#TomcatDir}\webapps\fedora\WEB-INF\web.xml"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF\"; DestName:"web.xml.backup"; Flags: ignoreversion external; Components: islandora;
-Source: "ConfigFiles\web.xml"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF"; Flags: ignoreversion external; Components: islandora;
+Source: "{tmp}\web.xml"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF"; Flags: ignoreversion external; Components: islandora;
 ; Islandora files
-Source: "ConfigFiles\filter-drupal.xml"; DestDir: "{#FedoraDir}\server\config"; Flags: ignoreversion external; Components: islandora;
-Source: "Islandora\DrupalFilter3.4.jar"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF\lib"; Flags: ignoreversion external; Components: islandora;
-Source: "ConfigFiles\permit-apim-to-authenticated.xml"; DestDir: "{#FedoraDir}\data\fedora-xacml-policies\repository-policies\default"; Flags: ignoreversion external; Components: islandora;
+Source: "{tmp}\filter-drupal.xml"; DestDir: "{#FedoraDir}\server\config"; Flags: ignoreversion external; Components: islandora;
+Source: "{tmp}\DrupalFilter3.4.jar"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF\lib"; Flags: ignoreversion external; Components: islandora;
+Source: "{tmp}\permit-apim-to-authenticated.xml"; DestDir: "{#FedoraDir}\data\fedora-xacml-policies\repository-policies\default"; Flags: ignoreversion external; Components: islandora;
 ; SOLR / Gsearch
 Source: "GsearchSolr\*"; DestDir: "{#FedoraDir}\gsearch_solr"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora;
-Source: "Islandora\apache-solr-1.4.1.war"; DestDir: "{#FedoraDir}\solr"; Flags: ignoreversion external; Components: islandora;
-Source: "Islandora\genericsearch-2.2\*"; DestDir: "{#TomcatDir}\webapps"; Flags: ignoreversion createallsubdirs recursesubdirs external; Components: islandora;
-Source: "ConfigFiles\solr.xml"; DestDir: "{#TomcatDir}\conf\Catalina\localhost"; Flags: ignoreversion external; Components: islandora;
+Source: "{tmp}\apache-solr-1.4.1.war"; DestDir: "{#FedoraDir}\solr"; Flags: ignoreversion external; Components: islandora;
+Source: "{tmp}\genericsearch-2.2\*"; DestDir: "{#TomcatDir}\webapps"; Flags: ignoreversion createallsubdirs recursesubdirs external; Components: islandora;
+Source: "{tmp}\solr.xml"; DestDir: "{#TomcatDir}\conf\Catalina\localhost"; Flags: ignoreversion external; Components: islandora;
 
 [Run]
 Filename: "{#ApacheTargetDir}\bin\httpd"; Parameters: "-k install -n ""{#ApacheServiceName}"""; Flags: runhidden; Components: apache;
@@ -120,7 +120,7 @@ Filename: "{tmp}\updateServerConfigForApache.bat"; Parameters: "{#ApacheTargetDi
 Filename: "{tmp}\updateServerConfigForDrupal.bat"; Parameters: "{#ApacheTargetDir} {#drupal_mysql_db_server} {#drupal_mysql_db_name} {#drupal_mysql_port} {#drupal_mysql_db_user} {#drupal_mysql_db_password} {#PhpDir} {#FedoraDir}"; Components: drupal;
 Filename: "{tmp}\updateServerConfigForFedora.bat"; Parameters: "{#TomcatDir} {#fedora_server} {#fedora_port} {#fedora_user} {#fedora_password} {#FedoraDir}"; Components: islandora;
 Filename: "{tmp}\updateServerConfigXslt.bat"; Parameters: "{#TomcatDir}"; Components: islandora;
-Filename: msiexec.exe; Parameters: "/i {tmp}\mysql-5.5.27-winx64.msi /quiet /l*v mysql_install_log.txt INSTALLDIR=""{#MySqlDir}"""; Flags: runascurrentuser; Components: mysql;
+Filename: "msiexec.exe"; Parameters: "/i {tmp}\mysql-5.5.27-winx64.msi /quiet /l*v mysql_install_log.txt INSTALLDIR=""{#MySqlDir}"""; Flags: runascurrentuser; Components: mysql;
 Filename: "{#MySqlDir}\bin\MySQLInstanceConfig.exe"; Parameters: "-i -q ""-l{#MySqlDir}\mysql_configure_log.txt"" ""-nMySQL Server 5.5"" ""-p{#MySqlDir}"" -v5.5.27 ""-t{#MySqlDir}\my-template.ini"" ""-c{#MySqlDir}\fedoraconfig.ini"" ServerType=DEDICATED DatabaseType=MIXED ConnectionUsage=DSS Port={#drupal_mysql_port} ServiceName={#MySqlServiceName} RootPassword={#rootPwd}"; Flags: runhidden; Components: mysql;
 Filename: "{tmp}\updateMySQLScript.bat"; Parameters: "{#drupal_mysql_db_user} {#drupal_mysql_db_password} {#drupal_admin_email} {tmp} {#MySqlDir} {#rootPwd} {#drupal_mysql_port} {#drupal_mysql_db_name}"; Components: mysql drupal;
 ; Start services

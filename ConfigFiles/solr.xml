@@ -1,3 +1,3 @@
-<Context docBase="${FedoraDir}/solr/apache-solr-1.4.1.war" debug="0" crossContext="true"> 
-<Environment name="solr/home" type="java.lang.String" value="${FedoraDir}/gsearch_solr/solr" override="true" /> 
+<Context docBase="${FedoraDir}\solr\apache-solr-1.4.1.war" debug="0" crossContext="true"> 
+<Environment name="solr/home" type="java.lang.String" value="${FedoraDir}\gsearch_solr\solr" override="true" /> 
 </Context>

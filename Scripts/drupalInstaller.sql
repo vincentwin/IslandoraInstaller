@@ -249,6 +249,122 @@ CREATE TABLE `cache` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
+
+--
+-- Table structure for table `cache_menu`
+--
+
+DROP TABLE IF EXISTS `cache_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cache_menu` (
+  `cid` varchar(255) NOT NULL DEFAULT '',
+  `data` longblob,
+  `expire` int(11) NOT NULL DEFAULT '0',
+  `created` int(11) NOT NULL DEFAULT '0',
+  `headers` text,
+  `serialized` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`),
+  KEY `expire` (`expire`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cache_page`
+--
+
+DROP TABLE IF EXISTS `cache_page`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cache_page` (
+  `cid` varchar(255) NOT NULL DEFAULT '',
+  `data` longblob,
+  `expire` int(11) NOT NULL DEFAULT '0',
+  `created` int(11) NOT NULL DEFAULT '0',
+  `headers` text,
+  `serialized` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`),
+  KEY `expire` (`expire`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cache_update`
+--
+
+DROP TABLE IF EXISTS `cache_update`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cache_update` (
+  `cid` varchar(255) NOT NULL DEFAULT '',
+  `data` longblob,
+  `expire` int(11) NOT NULL DEFAULT '0',
+  `created` int(11) NOT NULL DEFAULT '0',
+  `headers` text,
+  `serialized` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`),
+  KEY `expire` (`expire`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cache_form`
+--
+
+DROP TABLE IF EXISTS `cache_form`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cache_form` (
+  `cid` varchar(255) NOT NULL DEFAULT '',
+  `data` longblob,
+  `expire` int(11) NOT NULL DEFAULT '0',
+  `created` int(11) NOT NULL DEFAULT '0',
+  `headers` text,
+  `serialized` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`),
+  KEY `expire` (`expire`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cache_filter`
+--
+
+DROP TABLE IF EXISTS `cache_filter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cache_filter` (
+  `cid` varchar(255) NOT NULL DEFAULT '',
+  `data` longblob,
+  `expire` int(11) NOT NULL DEFAULT '0',
+  `created` int(11) NOT NULL DEFAULT '0',
+  `headers` text,
+  `serialized` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`),
+  KEY `expire` (`expire`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cache_block`
+--
+
+DROP TABLE IF EXISTS `cache_block`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cache_block` (
+  `cid` varchar(255) NOT NULL DEFAULT '',
+  `data` longblob,
+  `expire` int(11) NOT NULL DEFAULT '0',
+  `created` int(11) NOT NULL DEFAULT '0',
+  `headers` text,
+  `serialized` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cid`),
+  KEY `expire` (`expire`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
 --
 -- Table structure for table `comments`
 --
@@ -1245,4 +1361,20 @@ CREATE TABLE `watchdog` (
   PRIMARY KEY (`wid`),
   KEY `type` (`type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `xml_forms`
+--
+
+DROP TABLE IF EXISTS `xml_forms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `xml_forms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  `form` mediumtext NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
