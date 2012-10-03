@@ -9,7 +9,7 @@ set rootPwd=%6
 set drupal_mysql_port=%7
 set drupal_mysql_db_name=%8
 
-checksum.exe -a md5 -t %drupal_mysql_db_password% -o %tmpdir%\TempKey.txt
+java -jar ComputeHash.jar %drupal_mysql_db_password% > %tmpdir%\TempKey.txt
 set /p durpal_mysql_pw_hash=<%tmpdir%\TempKey.txt
 
 cscript replace.vbs %tmpdir%\drupalInstaller.sql "${drupal_mysql_db_user}" "%drupal_mysql_db_user%"
