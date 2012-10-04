@@ -14,9 +14,10 @@
 ;    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;
 
-#define MyAppName "Islandora"
+#define MyAppName "Islandora Installer"
 #define MyAppVersion "6.x-12.2.0"
 #define MyAppExeName "islandora_setup.exe"
+#define AppAuthor "Vincent Nguyen"
 
 ; source directories
 #define PhpDir "{ini:{src}\islandora_app.ini, Directories, PhpDir}"
@@ -55,7 +56,7 @@ AppId={{86EE9C86-57EE-40A6-AC45-E95A5C9599C4}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
-AppPublisher=Vincent Nguyen
+AppPublisher={#AppAuthor}
 CreateAppDir=no
 LicenseFile=LICENSE.txt
 InfoBeforeFile=INFO.txt
@@ -70,8 +71,9 @@ Name: full; Description: "Full Installtion";
 Name: custom; Description: "Custom Installation (not recommended)"; Flags: iscustom;
 
 [Components]
-Name: apache; Description: "Apache"; Flags: checkablealone; Types: full;
-Name: drupal; Description: "Drupal"; Flags: checkablealone; Types: full;
+Name: apache; Description: "Apache"; Types: full;
+Name: drupal; Description: "Drupal"; Types: full;
+Name: php; Description: "PHP"; Types: full;
 Name: mysql; Description: "MySQL"; Types: full;
 Name: islandora; Description: "Islandora"; Flags: checkablealone; Types: full;
 
@@ -100,7 +102,7 @@ Source: "MySQL\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recur
 Source: "ConfigFiles\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora apache;
 Source: "Islandora\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora;
 Source: "{tmp}\httpd.conf.{#envID}"; DestDir: "{#ApacheTargetDir}\conf"; DestName:"httpd.conf"; Flags: ignoreversion external; Components: apache;
-Source: "PHP\*"; DestDir: "{#PhpDir}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: drupal;
+Source: "PHP\*"; DestDir: "{#PhpDir}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: php drupal;
 ; Backup Fedora's web.xml and copy new web.xml
 Source: "{#TomcatDir}\webapps\fedora\WEB-INF\web.xml"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF\"; DestName:"web.xml.backup"; Flags: ignoreversion external; Components: islandora;
 Source: "{tmp}\web.xml"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF"; Flags: ignoreversion external; Components: islandora;
@@ -122,7 +124,7 @@ Filename: "{tmp}\updateServerConfigForFedora.bat"; Parameters: "{#TomcatDir} {#f
 Filename: "{tmp}\updateServerConfigXslt.bat"; Parameters: "{#TomcatDir}"; Components: islandora;
 Filename: "msiexec.exe"; Parameters: "/i {tmp}\mysql-5.5.27-winx64.msi /quiet /l*v mysql_install_log.txt INSTALLDIR=""{#MySqlDir}"""; Flags: runascurrentuser; Components: mysql;
 Filename: "{#MySqlDir}\bin\MySQLInstanceConfig.exe"; Parameters: "-i -q ""-l{#MySqlDir}\mysql_configure_log.txt"" ""-nMySQL Server 5.5"" ""-p{#MySqlDir}"" -v5.5.27 ""-t{#MySqlDir}\my-template.ini"" ""-c{#MySqlDir}\fedoraconfig.ini"" ServerType=DEDICATED DatabaseType=MIXED ConnectionUsage=DSS Port={#drupal_mysql_port} ServiceName={#MySqlServiceName} RootPassword={#rootPwd}"; Flags: runhidden; Components: mysql;
-Filename: "{tmp}\updateMySQLScript.bat"; Parameters: "{#drupal_mysql_db_user} {#drupal_mysql_db_password} {#drupal_admin_email} {tmp} {#MySqlDir} {#rootPwd} {#drupal_mysql_port} {#drupal_mysql_db_name}"; Components: mysql drupal;
+Filename: "{tmp}\updateMySQLScript.bat"; Parameters: "{#drupal_mysql_db_user} {#drupal_mysql_db_password} {#drupal_admin_email} {tmp} {#MySqlDir} {#rootPwd} {#drupal_mysql_port} {#drupal_mysql_db_name}"; Components: drupal;
 ; Start services
 Filename: "{cmd}"; Parameters: "/C ""sc start {#ApacheServiceName}"""; Components: apache;
 Filename: "{cmd}"; Parameters: "/C ""sc start {#MySqlServiceName}"""; Components: mysql;
