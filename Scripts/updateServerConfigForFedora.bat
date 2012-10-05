@@ -23,6 +23,8 @@ cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\ind
 cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\index\gsearch_solr\index.properties "${fedora_server}" "%fedora_server%"
 cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\index\gsearch_solr\index.properties "${fedora_port}" "%fedora_port%"
 
+cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\index\gsearch_solr\conf\solrconfig.xml "${FedoraDir}" "%FedoraDir%"
+
 cscript replace.vbs %TomcatDir%\webapps\fedora\WEB-INF\web.xml "${FedoraDir}" "%FedoraDir%"
 
 cscript replace.vbs %TomcatDir%\conf\Catalina\localhost\solr.xml "${FedoraDir}" "%FedoraDir%"
