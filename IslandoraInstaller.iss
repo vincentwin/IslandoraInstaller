@@ -137,6 +137,6 @@ Filename: "{#ApacheTargetDir}\bin\httpd"; Parameters: "-k uninstall -n ""{#Apach
 ; Filename: "{cmd}"; Parameters: "/C ""sc delete {#MySqlServiceName}"""; Components: mysql;
 
 [UninstallDelete]
-Type: files; Name: "{#ApacheTargetDir}\htdocs\drupal"; Components: drupal;
-Type: files; Name: "{#ApacheTargetDir}\*"; Components: apache;
-Type: files; Name: "{#PhpDir}\*"; Components: php;
+Type: filesandordirs; Name: "{#ApacheTargetDir}\htdocs\drupal"; Components: drupal;
+Type: filesandordirs; Name: "{#ApacheTargetDir}"; Components: apache;
+Type: filesandordirs; Name: "{#PhpDir}"; Components: php;
