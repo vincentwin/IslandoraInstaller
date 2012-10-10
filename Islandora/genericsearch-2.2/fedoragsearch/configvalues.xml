@@ -19,11 +19,11 @@
 		<pathelement path="${fedora.home}/server/logs"/>
 	</path>
 	<pathconvert targetos="unix" property="log.path" refid="logs.path"/>
-	<property name="fedora.version" value="3.1" />
+	<property name="fedora.version" value="3.4.2" />
 	<!-- The three soap properties are used for the deployment of the deploy.wsdd file for soap access -->
-	<property name="soap.deploy.hostport" value="localhost:8080" />
-	<property name="soap.deploy.user" value="fedoraAdmin" />
-	<property name="soap.deploy.pass" value="fedoraAdmin" />
+	<property name="soap.deploy.hostport" value="${fedora_server}:${fedora_port}" />
+	<property name="soap.deploy.user" value="${fedora_user}" />
+	<property name="soap.deploy.pass" value="${fedora_password}" />
 
 	<target name="configDefault"
 	          description="select the default config, by setting these three properties">
