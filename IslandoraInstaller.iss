@@ -109,7 +109,7 @@ Source: "{#TomcatDir}\webapps\fedora\WEB-INF\web.xml"; DestDir: "{#TomcatDir}\we
 Source: "{tmp}\web.xml"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF"; Flags: ignoreversion external; Components: islandora;
 ; Islandora files
 Source: "{tmp}\filter-drupal.xml"; DestDir: "{#FedoraDir}\server\config"; Flags: ignoreversion external; Components: islandora;
-Source: "{tmp}\DrupalFilter3.4.jar"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF\lib"; Flags: ignoreversion external; Components: islandora;
+Source: "{tmp}\fcrepo-drupalauthfilter-3.4.2.jar"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF\lib"; Flags: ignoreversion external; Components: islandora;
 Source: "{tmp}\permit-apim-to-authenticated.xml"; DestDir: "{#FedoraDir}\data\fedora-xacml-policies\repository-policies\default"; Flags: ignoreversion external; Components: islandora;
 ; SOLR / Gsearch
 Source: "GsearchSolr\*"; DestDir: "{#FedoraDir}\gsearch_solr"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora;
