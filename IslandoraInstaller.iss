@@ -74,7 +74,7 @@ Name: custom; Description: "Custom (Uncheck installed items)"; Flags: iscustom;
 Name: apache; Description: "Apache"; Types: full;
 Name: drupal; Description: "Drupal"; Types: full;
 Name: php; Description: "PHP"; Types: full;
-;Name: mysql; Description: "MySQL"; Types: full;
+Name: mysql; Description: "MySQL"; Flags: checkablealone;
 Name: islandora; Description: "Islandora"; Flags: checkablealone; Types: full;
 
 
@@ -99,11 +99,11 @@ Name: "english"; MessagesFile: "compiler:Default.isl";
 Source: "ApacheHTTP\*"; DestDir: "{#ApacheTargetDir}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: apache;
 Source: "Drupal\*"; DestDir: "{#ApacheTargetDir}\htdocs\drupal"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: drupal;
 Source: "Scripts\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: apache;
-; Source: "MySQL\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: mysql;
+Source: "MySQL\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: mysql;
 Source: "ConfigFiles\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora apache drupal;
 Source: "Islandora\*"; DestDir: "{tmp}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: islandora;
 Source: "{tmp}\httpd.conf.{#envID}"; DestDir: "{#ApacheTargetDir}\conf"; DestName:"httpd.conf"; Flags: ignoreversion external; Components: apache;
-Source: "PHP\*"; DestDir: "{#PhpDir}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: php drupal;
+Source: "PHP\*"; DestDir: "{#PhpDir}"; Flags: ignoreversion createallsubdirs recursesubdirs; Components: php;
 ; Backup Fedora's web.xml and copy new web.xml
 Source: "{#TomcatDir}\webapps\fedora\WEB-INF\web.xml"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF\"; DestName:"web.xml.backup"; Flags: ignoreversion external; Components: islandora;
 Source: "{tmp}\web.xml"; DestDir: "{#TomcatDir}\webapps\fedora\WEB-INF"; Flags: ignoreversion external; Components: islandora;
@@ -123,20 +123,30 @@ Filename: "{tmp}\updateServerConfigForApache.bat"; Parameters: "{#ApacheTargetDi
 Filename: "{tmp}\updateServerConfigForDrupal.bat"; Parameters: "{#ApacheTargetDir} {#drupal_mysql_db_server} {#drupal_mysql_db_name} {#drupal_mysql_port} {#drupal_mysql_db_user} {#drupal_mysql_db_password} {#PhpDir} {#FedoraDir}"; Components: drupal;
 Filename: "{tmp}\updateServerConfigForFedora.bat"; Parameters: "{#TomcatDir} {#fedora_server} {#fedora_port} {#fedora_user} {#fedora_password} {#FedoraDir}"; Components: islandora;
 Filename: "{tmp}\updateServerConfigXslt.bat"; Parameters: "{#TomcatDir}"; Components: islandora;
-; Filename: "msiexec.exe"; Parameters: "/i {tmp}\mysql-5.5.27-winx64.msi /quiet /l*v mysql_install_log.txt INSTALLDIR=""{#MySqlDir}"""; Flags: runascurrentuser; Components: mysql;
-; Filename: "{#MySqlDir}\bin\MySQLInstanceConfig.exe"; Parameters: "-i -q ""-l{#MySqlDir}\mysql_configure_log.txt"" ""-nMySQL Server 5.5"" ""-p{#MySqlDir}"" -v5.5.27 ""-t{#MySqlDir}\my-template.ini"" ""-c{#MySqlDir}\fedoraconfig.ini"" ServerType=DEDICATED DatabaseType=MIXED ConnectionUsage=DSS Port={#drupal_mysql_port} ServiceName={#MySqlServiceName} RootPassword={#rootPwd}"; Flags: runhidden; Components: mysql;
+Filename: "msiexec.exe"; Parameters: "/i {tmp}\mysql-5.5.27-winx64.msi /quiet /l*v mysql_install_log.txt INSTALLDIR=""{#MySqlDir}"""; Flags: runascurrentuser; Components: mysql;
+Filename: "{#MySqlDir}\bin\MySQLInstanceConfig.exe"; Parameters: "-i -q ""-l{#MySqlDir}\mysql_configure_log.txt"" ""-nMySQL Server 5.5"" ""-p{#MySqlDir}"" -v5.5.27 ""-t{#MySqlDir}\my-template.ini"" ""-c{#MySqlDir}\fedoraconfig.ini"" ServerType=DEDICATED DatabaseType=MIXED ConnectionUsage=DSS Port={#drupal_mysql_port} ServiceName={#MySqlServiceName} RootPassword={#rootPwd}"; Flags: runhidden; Components: mysql;
+Filename: "{cmd}"; Parameters: "/C ""sc start {#MySqlServiceName}"""; Components: drupal;
 Filename: "{tmp}\updateMySQLScript.bat"; Parameters: "{#drupal_mysql_db_user} {#drupal_mysql_db_password} {#drupal_admin_email} {tmp} {#MySqlDir} {#rootPwd} {#drupal_mysql_port} {#drupal_mysql_db_name}"; Components: drupal;
 ; Start services
 Filename: "{cmd}"; Parameters: "/C ""sc start {#ApacheServiceName}"""; Components: apache;
 ; Filename: "{cmd}"; Parameters: "/C ""sc start {#MySqlServiceName}"""; Components: mysql;
 
+[Code]
+function InitializeUninstall(): Boolean;
+begin
+  Result := MsgBox('InitializeUninstall:' #13#13 'Uninstall is initializing. Do you really want to start Uninstall?', mbConfirmation, MB_YESNO) = idYes;
+  if Result = False then
+    MsgBox('InitializeUninstall:' #13#13 'Ok, bye bye.', mbInformation, MB_OK);
+end;
+
 [UninstallRun]
 Filename: "{cmd}"; Parameters: "/C ""sc stop {#ApacheServiceName}"""; Components: apache;
-; Filename: "{cmd}"; Parameters: "/C ""sc stop {#MySqlServiceName}"""; Components: mysql;
+Filename: "{cmd}"; Parameters: "/C ""sc stop {#MySqlServiceName}"""; Components: mysql;
 Filename: "{#ApacheTargetDir}\bin\httpd"; Parameters: "-k uninstall -n ""{#ApacheServiceName}"""; Components: apache;
-; Filename: "{cmd}"; Parameters: "/C ""sc delete {#MySqlServiceName}"""; Components: mysql;
+Filename: "{cmd}"; Parameters: "/C ""sc delete {#MySqlServiceName}"""; Components: mysql;
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{#ApacheTargetDir}\htdocs\drupal"; Components: drupal;
 Type: filesandordirs; Name: "{#ApacheTargetDir}"; Components: apache;
 Type: filesandordirs; Name: "{#PhpDir}"; Components: php;
+Type: filesandordirs; Name: "{#MySqlDir}"; Components: mysql;
