@@ -13,7 +13,7 @@ cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\fed
 cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\fedoragsearch.properties "${fedora_user}" "%fedora_user%"
 cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\fedoragsearch.properties "${fedora_password}" "%fedora_password%"
 
-cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\repository\gsearch_solr\repository.properties "${FedoraDir}" "%TomcatDir%"
+cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\repository\gsearch_solr\repository.properties "${FedoraDir}" "%FedoraDir%"
 cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\repository\gsearch_solr\repository.properties "${fedora_server}" "%fedora_server%"
 cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\repository\gsearch_solr\repository.properties "${fedora_port}" "%fedora_port%"
 cscript replace.vbs %TomcatDir%\webapps\fedoragsearch\WEB-INF\classes\config\repository\gsearch_solr\repository.properties "${fedora_user}" "%fedora_user%"
