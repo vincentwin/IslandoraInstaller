@@ -40,7 +40,7 @@ WARNING: Backup all files before running installer (mainly TOMCAT_HOME and FEDOR
 Prerequisites
 -------------------
 1. Install Fedora.  Instructions on installing Fedora are here: https://wiki.duraspace.org/display/ISLANDORA6122/Installing+Fedora
-2. Install MySQL.  Create a drupal database and a user with all privileges to that database.
+2. Install MySQL. 
 
 Islandora
 -------------------

@@ -25,7 +25,7 @@ java -jar ComputeHash.jar %drupal_mysql_db_password% > %tmpdir%\TempKey.txt
 set /p durpal_mysql_pw_hash=<%tmpdir%\TempKey.txt
 
 cscript replace.vbs %tmpdir%\drupalInstaller.sql "${drupal_mysql_db_user}" "%drupal_mysql_db_user%"
-cscript replace.vbs %tmpdir%\drupalInstaller.sql "${durpal_mysql_pw_hash}" "%durpal_mysql_pw_hash%"
+cscript replace.vbs %tmpdir%\drupalInstaller.sql "${drupal_mysql_db_password}" "%drupal_mysql_pw_hash%"
 cscript replace.vbs %tmpdir%\drupalInstaller.sql "${drupal_admin_email}" "%drupal_admin_email%"
 cscript replace.vbs %tmpdir%\drupalInstaller.sql "${fedora_server}" "%fedora_server%"
 cscript replace.vbs %tmpdir%\drupalInstaller.sql "${fedora_port}" "%fedora_port%"
